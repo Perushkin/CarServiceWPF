@@ -1,0 +1,97 @@
+﻿<Window x:Class="CarService.MainForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarService"
+        mc:Ignorable="d"
+        Title="MainForm" Height="525" Width="941"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="111*"/>
+            <RowDefinition Height="106*"/>
+        </Grid.RowDefinitions>
+        <Menu FontSize="14px" Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Формы">
+                <MenuItem Name="clientAdd" Header="Добавить клиента" Click="clientAdd_Click"></MenuItem>
+                <MenuItem Name="employeeAdd" Header="Добавить сотрудника" Click="employeeAdd_Click"></MenuItem>
+                <MenuItem Name="workTypeAdd" Header="Добавить тип работы" Click="workTypeAdd_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Отчёты">
+                <MenuItem Name="spisClient" Header="Список всех клиентов" Click="spisClient_Click"></MenuItem>
+                <MenuItem Name="spisOrder" Header="Список всех заказов" Click="spisOrder_Click"></MenuItem>
+
+            </MenuItem>
+        </Menu>
+        <DataGrid x:Name="DataGrid" ItemsSource="{Binding}" Margin="0,28,0,0" AutoGenerateColumns="False" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="orderId"
+                                    Binding="{Binding orderId}"
+                                    Header="Код заказа"
+                                    IsReadOnly="True"
+                                    Width="80" />
+                <DataGridTextColumn x:Name="clientId"
+                                    Binding="{Binding clientId}"
+                                    Header="Код клиента"
+                                    IsReadOnly="True"
+                                    Width="80" />
+                <DataGridTextColumn x:Name="carModel"
+                                    Binding="{Binding carModel}"
+                                    Header="Автомобиль"
+                                    IsReadOnly="True"
+                                    Width="180" />
+                <DataGridTextColumn x:Name="workType"
+                                    Binding="{Binding workType}"
+                                    Header="Тип ремонта"
+                                    IsReadOnly="True"
+                                    Width="200" />
+                <DataGridTextColumn x:Name="price"
+                                    Binding="{Binding price}"
+                                    Header="Цена"
+                                    IsReadOnly="True"
+                                    Width="80" />
+                <DataGridTextColumn x:Name="employeeName"
+                                    Binding="{Binding employeeName}"
+                                    Header="Сотрудник"
+                                    IsReadOnly="True"
+                                    Width="200" />
+                <DataGridCheckBoxColumn x:Name="completed"
+                                    Binding="{Binding completed}"
+                                    Header="Выполнено"
+                                    
+                                    Width="80" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <GroupBox Name="grB1" Header="Поиск:" FontSize="14px" Padding="5" Margin="612,61,10,0" Height="189" VerticalAlignment="Top" Visibility="Hidden">
+            <StackPanel Margin="0,0,-12,0" Height="107">
+                <RadioButton Name="all" FontSize="14px" IsChecked="True" Margin="3" Checked="all_Checked">Показать всех</RadioButton>
+                <RadioButton Name="id" FontSize="14px" Margin="3" Checked="id_Checked" >По коду заказа</RadioButton>
+                <RadioButton Name="ClientId" FontSize="14px" Margin="3" Checked="ClientId_Checked" >По коду клиента</RadioButton>
+                <TextBox x:Name="findTb" FontSize="14px" Margin="5,10,0,10" Height="23" TextWrapping="Wrap" HorizontalAlignment="Left" Width="270"/>
+            </StackPanel>
+        </GroupBox>
+        <Button Name="bAddClient" Content="Добавить клиента" HorizontalAlignment="Center" Margin="0,98,0,0" VerticalAlignment="Top" Height="31" Width="136" Visibility="Visible" Click="Button_Click"/>
+        <Button Name="bOrderMain" Content="Оформить заказ" HorizontalAlignment="Center" Margin="0,188,0,0" VerticalAlignment="Top" Height="32" Width="136" Visibility="Visible" Click="Button_Click_2"/>
+        <Label Content="Текущие заказы" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label Name="lMenu" Content="Меню" HorizontalAlignment="Center" Margin="0,61,0,0" VerticalAlignment="Top"/>
+        <Button Name="bAddEmployee" Content="Добавить сотрудника" HorizontalAlignment="Center" Margin="0,139,0,0" VerticalAlignment="Top" Height="31" Width="136" Visibility="Visible" Click="Button_Click_1"/>
+        <Button x:Name="BAdd" Content="Добавить заказ" HorizontalAlignment="Left" Margin="470,194,0,0" VerticalAlignment="Top" Height="28" Width="115" Click="Button_Click_Add" Visibility="Hidden"/>
+        <TextBox Name="orderIdTb" HorizontalAlignment="Left" Margin="116,74,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="58" Visibility="Hidden"/>
+        <TextBox Name="clientIdTb" HorizontalAlignment="Left" Margin="116,100,0,0" VerticalAlignment="Top" Width="58" Height="20" Visibility="Hidden"/>
+        <TextBox Name="carModelTb" HorizontalAlignment="Left" Margin="116,134,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183" Visibility="Hidden"/>
+        <ComboBox Name="workTypeTb" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="116,162,0,0" VerticalAlignment="Top" Width="183" SelectionChanged="workTypeTb_SelectionChanged" Visibility="Hidden"/>
+        <TextBox Name="priceTb" HorizontalAlignment="Left" Margin="116,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.508,0.67" Visibility="Hidden"/>
+        <ComboBox Name="employeeNameTb" HorizontalAlignment="Left" Margin="405,78,0,0" VerticalAlignment="Top" Width="180" Visibility="Hidden"/>
+        <CheckBox Name="completedTb" Content="CheckBox" HorizontalAlignment="Left" Margin="331,145,0,0" VerticalAlignment="Top" Visibility="Hidden" />
+        <Button x:Name="BUpdate" Content="Обновить" HorizontalAlignment="Left" Margin="514,157,0,0" VerticalAlignment="Top" Height="24" Width="71" Click="BUpdate_Click" Visibility="Hidden"/>
+        <Button Content="Удалить" x:Name="BDelete" HorizontalAlignment="Left" Margin="385,194,0,0" VerticalAlignment="Top" Height="28" Width="80" Click="BDelete_Click" Visibility="Hidden"/>
+        <Label Name="lIdOrder" Content="Код заказа" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label Name="lIdClien" Content="Код клиента" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label Name="lCarModel" Content="Модель авто" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label Name="lWorkType" Content="Тип работы" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label Name="lPrice" Content="Стоимость" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label Name="lEmployee" Content="Сотрудник" HorizontalAlignment="Left" Margin="331,76,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Button x:Name="BClientT" Content="Список клиентов" HorizontalAlignment="Left" Margin="185,100,0,0" VerticalAlignment="Top" Width="114" Height="23" Click="BClientT_Click" Visibility="Hidden"/>
+    </Grid>
+</Window>

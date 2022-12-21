@@ -1,0 +1,41 @@
+﻿<Window x:Class="CarService.WorkTypeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarService"
+        mc:Ignorable="d"
+        Title="WorkTypeWindow" Height="450" Width="800">
+    <Grid Margin="10,10,10,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="196*"/>
+            <ColumnDefinition Width="166*"/>
+            <ColumnDefinition Width="213*"/>
+            <ColumnDefinition Width="179*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Добавить услугу" x:Name="addBtn" Margin="29,345,29,0" VerticalAlignment="Top" Height="28" Click="Button_Click" Grid.Column="3"/>
+        <Button Content="Удалить" x:Name="deleteBtn" Margin="10,345,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="127" Click="deleteBtn_Click"/>
+
+        <DataGrid x:Name="gridViewWork" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" Margin="10,10,10,152" Grid.ColumnSpan="4" AutoGenerateColumns="False" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Binding="{Binding workTypeId}"
+                    x:Name="workTypeId"
+                    IsReadOnly="True"
+                    Width="55"
+                    Header="ID"
+                    />
+                <DataGridTextColumn
+                    Binding="{Binding workName}"
+                    x:Name="workName"
+                    IsReadOnly="True"
+                    Width="700"
+                    Header="Название услуги"
+                    />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBox x:Name="workNameTb" HorizontalAlignment="Left" Margin="61,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Height="23" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="workTypeIdTb" HorizontalAlignment="Left" Margin="10,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Height="23"/>
+    </Grid>
+</Window>
